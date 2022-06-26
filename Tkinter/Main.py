@@ -4,8 +4,6 @@ from tkinter import filedialog
 primary_color = "#2E86AB"
 background_color = "#080808"
 
-home_window = Tk()
-
 def signup():
     home_window.destroy()
     signup_window = Tk()
@@ -49,10 +47,42 @@ def signup():
         password = password_entry.get()
         print(password)
         # path = path_entry.get()
+    
+    def goback():
+        signup_window.destroy()
+        home()
+
     enter_button = Button(signup_window,command=button_click,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     enter_button.place(relx=0.5,y=680,anchor = CENTER)
 
+    back_button = Button(signup_window,command=goback,text="Back",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
+
+def login():
+    home_window.destroy()
+    signup_window = Tk()
+    signup_window.geometry("1280x720")
+    signup_window.title("Uni-Pass")
+
+    icon = PhotoImage(file=r'Assets\images\logo.png')
+    signup_window.iconphoto(True,icon)
+    signup_window.config(background=background_color)
+
+    usernametk = Label(signup_window,text="Enter your username",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    usernametk.place(relx=0.5,y=180,anchor = CENTER)
+
+    username_entry = Entry(signup_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1)   
+    username_entry.place(relx=0.5,y=260,anchor = CENTER)
+
+    passwordtk = Label(signup_window,text="Enter your password",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    passwordtk.place(relx=0.5,y=380,anchor = CENTER)
+
+    password_entry = Entry(signup_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show='*')   
+    password_entry.place(relx=0.5,y=460,anchor = CENTER)
+
 def home():
+    global home_window
+    home_window = Tk()
     home_window.geometry("1280x720")
     home_window.title("Uni-Pass")
 
@@ -69,7 +99,7 @@ def home():
     signup_button = Button(home_window,command=signup,text="Sign-Up",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     signup_button.place(relx=0.35,y=450,anchor = CENTER)
 
-    login_button = Button(home_window,text="Login",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    login_button = Button(home_window,command=login,text="Login",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     login_button.place(relx=0.65,y=450,anchor = CENTER)
 
     home_window.mainloop()
