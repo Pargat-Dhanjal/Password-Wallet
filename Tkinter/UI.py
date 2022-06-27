@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from cryptography.fernet import Fernet
 
 primary_color = "#2E86AB"
 background_color = "#080808"
@@ -40,17 +41,18 @@ def signup():
     browse_button = Button(signup_window,text="Browse",command=get_path,font=("Comic Sans",10,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     browse_button.place(relx=0.65,y=560,anchor = CENTER)
 
-    def button_click():
-        global path
-        username = username_entry.get()
-        print(username)
-        password = password_entry.get()
-        print(password)
-        # path = path_entry.get()
-    
     def goback():
         signup_window.destroy()
         home()
+    
+    def button_click():
+        global path
+        username = username_entry.get()
+        # print(username)
+        password = password_entry.get()
+        # print(password)
+        # print(path)
+        goback()
 
     enter_button = Button(signup_window,command=button_click,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     enter_button.place(relx=0.5,y=680,anchor = CENTER)
@@ -59,26 +61,64 @@ def signup():
     back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
 def login():
+    global login_window
     home_window.destroy()
-    signup_window = Tk()
-    signup_window.geometry("1280x720")
-    signup_window.title("Uni-Pass")
+    login_window = Tk()
+    login_window.geometry("1280x720")
+    login_window.title("Uni-Pass")
 
     icon = PhotoImage(file=r'Assets\images\logo.png')
-    signup_window.iconphoto(True,icon)
-    signup_window.config(background=background_color)
+    login_window.iconphoto(True,icon)
+    login_window.config(background=background_color)
 
-    usernametk = Label(signup_window,text="Enter your username",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    usernametk = Label(login_window,text="Enter your username",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
     usernametk.place(relx=0.5,y=180,anchor = CENTER)
 
-    username_entry = Entry(signup_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1)   
+    username_entry = Entry(login_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1)   
     username_entry.place(relx=0.5,y=260,anchor = CENTER)
 
-    passwordtk = Label(signup_window,text="Enter your password",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    passwordtk = Label(login_window,text="Enter your password",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
     passwordtk.place(relx=0.5,y=380,anchor = CENTER)
 
-    password_entry = Entry(signup_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show='*')   
+    password_entry = Entry(login_window,width=20,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show='*')   
     password_entry.place(relx=0.5,y=460,anchor = CENTER)
+
+    def goback():
+        login_window.destroy()
+        home()
+
+
+    enter_button = Button(login_window,command=user_window,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    enter_button.place(relx=0.5,y=580,anchor = CENTER)
+
+    back_button = Button(login_window,command=goback,text="Back",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
+
+def user_window():
+    login_window.destroy()
+    user_window = Tk()
+    user_window.geometry("1280x720")
+    user_window.title("Uni-Pass")
+
+    icon = PhotoImage(file=r'Assets\images\logo.png')
+    user_window.iconphoto(True,icon)
+    user_window.config(background=background_color)
+
+    username_display = Label(user_window,text="Welcome Beetroot",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    username_display.place(relx=0.5,y=80,anchor = CENTER)
+
+    def goback():
+        user_window.destroy()
+        home()
+
+    variable = "button" + " : gg"
+    Label(user_window,text=variable,font=("Comic Sans",20,"bold"),bg=background_color,fg=primary_color).place(relx=0.5,rely=0.4,anchor = CENTER)
+
+    logout_button = Button(user_window,command=goback,text="logout",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    logout_button.place(relx=0.1,rely=0.1,anchor = CENTER)
+
+    new_button = Button(user_window,text="store new password",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    new_button.place(relx=0.5,rely=0.25,anchor = CENTER)
 
 def home():
     global home_window
