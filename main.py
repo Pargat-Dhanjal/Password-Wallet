@@ -45,6 +45,8 @@ class PasswordWallet:
 
     def createPassFile(self, path, initial=None):
         self.passFile = "usr/usrdata/"+path+".txt"
+        fp = open(self.passFile, "w")
+        fp.close()
         if initial is not None:
             for key, value in initial.items():
                 self.addPass(key, value)
@@ -66,81 +68,43 @@ class PasswordWallet:
 
     def getPass(self, site):
         return self.passDict[site]
-    
+
     def showPass(self):
         for i in self.passDict.keys():
             print(i)
-
-def seprator():
-    print("\n#########################\n")
 
 def viewPass(obj):
     cond = True
     while cond:
         print("""Select an Option
           (1) Store a New Password
-          (2) View Existing Passwords
-          (b) Go Back""")
-        seprator()
+          (2) View Saved Sites
+          (3) Get Passwords
+          (e) Log Out""")
+
         n = input("Enter choice here: ")
-        seprator()
+
         if n == "1":
-            seprator()
             site = input("Enter Site Name: ")
             password = input("Enter password: ")
-            seprator()
             obj.addPass(site, password)
-            seprator()
+
         elif n == "2":
-            seprator()
             obj.showPass()
-            seprator()
+        
+        elif n=="3":
             site = input("Enter site name to  get password: ")
-            seprator()
-            print("Password:", obj.getPass(site))
-            seprator()
-        elif n == "b":
+            try:
+                print("Password:", obj.getPass(site))
+            except:
+                print("No Password was found under the site name!")
+
+        elif n == "e":
             cond = False
-            seprator()
-        else:
-            print("Kindly enter a correct option only!")
-            seprator()
-
-
-def loadFiles(obj):
-    cond = True
-    while cond:
-        print("""Select an Option
-          (1) Create New Password File
-          (2) Load Existing Password File
-          (b) Go Back""")
-        seprator()
-        n = input("Enter choice here: ")
-        seprator()
-
-        if n == "1":
-            path = input("Enter password file name: ")
-            seprator()
-            obj.createPassFile(path)
-            print("Succesfully created a new Password file!")
-            seprator()
-            viewPass(obj)
-
-        elif n == "2":
-            path = input("Enter a file name to load: ")
-            seprator()
-            obj.loadPassFile(path)
-            print("Succesfully loaded the password file!")
-            viewPass(obj)
-
-        elif n == "b":
-            cond = False
-            seprator()
+            obj.__init__()
 
         else:
             print("Kindly enter a correct option only!")
-            seprator()
-
 
 def main():
     obj = PasswordWallet()
@@ -150,41 +114,38 @@ def main():
         (1) Add a new User
         (2) Login to an existing User
         (e) Exit""")
-        seprator()
         n = input("Enter choice here: ")
-        seprator()
-
+        
         if n == "1":
             usrname = input("Enter username: ")
             password = input("Enter Password: ")
             keypath = input("Enter a secure key path to store key: ")
-            seprator()
-            # obj.createKey(keypath)
+            obj.createPassFile(usrname)
             obj.addUsr(usrname, password, keypath)
             print("Succesfully Created a new User!")
-            seprator()
+            viewPass(obj)
 
         elif n == "2":
             usrname = input("Enter username: ")
             password = input("Enter Password: ")
-            keypath = obj.loginUsr("usr/usrFile.txt", usrname, password)+".key"
+            keypath = obj.loginUsr("usr/usrFile.txt", usrname, password)
             if(keypath == False):
                 print("Wrong Username or Password")
-                seprator()
+
             else:
+                keypath = keypath+".key"
                 obj.loadKey(keypath)
                 print("You are now Logged in!\n")
-                loadFiles(obj)
-                seprator()
+                print("Welcome", usrname, "! Glad to see you!")
+                obj.loadPassFile(usrname)
+                viewPass(obj)
 
         elif n == "e":
             cond = False
             print("Buh Bye!")
-            seprator()
 
         else:
             print("Kindly enter a correct option only!")
-            seprator()
 
 
 main()
