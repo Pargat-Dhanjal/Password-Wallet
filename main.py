@@ -77,8 +77,10 @@ class PasswordWallet:
 
     def showPass(self):
     # prints  the  saved password site names
+        siteNames=[]
         for i in self.passDict.keys():
-            print(i)
+            siteNames.append(i)
+        return siteNames
 
 def viewPass(obj):
 # This  function gets called once the user has logged in
@@ -98,7 +100,8 @@ def viewPass(obj):
             obj.addPass(site, password)
 
         elif n == "2":
-            obj.showPass()
+            li=obj.showPass()
+            print(li)
         
         elif n=="3":
             site = input("Enter site name to  get password: ")
