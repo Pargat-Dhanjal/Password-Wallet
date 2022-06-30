@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from typing import Counter
 from cryptography.fernet import Fernet
 import main
 
@@ -9,6 +10,8 @@ primary_color = "#2E86AB"
 background_color = "#080808"
 
 final_username = None
+
+counter = 0
 
 def signup():
     home_window.destroy()
@@ -114,9 +117,24 @@ def login():
     back_button = Button(login_window,command=goback,text="Back",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
+def saved_passwords():
+    global variable
+    obj.loadPassFile(variable)
+    user_window.destroy()
+    savedpass_window = Tk()
+    savedpass_window.geometry("1280x720")
+    savedpass_window.title("Uni-Pass")
+
+    icon = PhotoImage(file=r'Assets\images\logo.png')
+    savedpass_window.iconphoto(True,icon)
+    savedpass_window.config(background=background_color)
+
 def user():
     global final_username
     global user_window
+    global variable
+    global name_newfile
+    global counter
     user_window = Tk()
     user_window.geometry("1280x720")
     user_window.title("Uni-Pass")
@@ -132,9 +150,15 @@ def user():
         user_window.destroy()
         home()
 
-    variable = "button" + " : gg"
-    Label(user_window,text=variable,font=("Comic Sans",20,"bold"),bg=background_color,fg=primary_color).place(relx=0.5,rely=0.4,anchor = CENTER)
+    try:
+        variable = name_newfile
+        # print(variable)
+        for x in range(counter):
+            Label(user_window,text=variable,font=("Comic Sans",20,"bold"),bg=background_color,fg=primary_color).place(relx=0.5,rely=(x+4)/10,anchor = CENTER)
+    except:
+        pass
 
+    
     logout_button = Button(user_window,command=goback,text="logout",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     logout_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
@@ -158,9 +182,12 @@ def new_password():
     file_entry.place(relx=0.5,y=460,anchor = CENTER)
 
     def addfile():
-        path = file_entry.get()
-        obj.createPassFile(path)
+        global name_newfile
+        global counter
+        name_newfile = file_entry.get()
+        obj.createPassFile(name_newfile)
         print("Succesfully created a new Password file!")
+        counter += 1
         newpass_window.destroy()
         user()
     
