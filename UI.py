@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import filedialog
-from typing import Counter
 from cryptography.fernet import Fernet
 import main
 
@@ -62,6 +61,7 @@ def signup():
         path = path_entry.get()
         # print(path)
         obj.addUsr(username, password, path)
+        obj.createPassFile(username)
         goback()
 
     enter_button = Button(signup_window,command=button_click,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
@@ -118,8 +118,7 @@ def login():
     back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
 def saved_passwords():
-    global variable
-    obj.loadPassFile(variable)
+    # obj.showPass()
     user_window.destroy()
     savedpass_window = Tk()
     savedpass_window.geometry("1280x720")
@@ -132,8 +131,6 @@ def saved_passwords():
 def user():
     global final_username
     global user_window
-    global variable
-    global name_newfile
     global counter
     user_window = Tk()
     user_window.geometry("1280x720")
@@ -149,15 +146,6 @@ def user():
     def goback():
         user_window.destroy()
         home()
-
-    try:
-        variable = name_newfile
-        # print(variable)
-        for x in range(counter):
-            Label(user_window,text=variable,font=("Comic Sans",20,"bold"),bg=background_color,fg=primary_color).place(relx=0.5,rely=(x+4)/10,anchor = CENTER)
-    except:
-        pass
-
     
     logout_button = Button(user_window,command=goback,text="logout",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     logout_button.place(relx=0.1,rely=0.1,anchor = CENTER)
@@ -165,7 +153,11 @@ def user():
     new_button = Button(user_window,command=new_password,text="store new password",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     new_button.place(relx=0.5,rely=0.25,anchor = CENTER)
 
+    button = Button(user_window,command=saved_passwords,text="View saved Passwords",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    button.place(relx=0.5,rely=0.45,anchor = CENTER)
+
 def new_password():
+    global new_password
     user_window.destroy()
     newpass_window = Tk()
     newpass_window.geometry("1280x720")
@@ -175,23 +167,26 @@ def new_password():
     newpass_window.iconphoto(True,icon)
     newpass_window.config(background=background_color)
 
-    filetk = Label(newpass_window,text="Enter file name",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
-    filetk.place(relx=0.5,y=380,anchor = CENTER)
+    sitetk = Label(newpass_window,text="Enter site name",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    sitetk.place(relx=0.5,y=180,anchor = CENTER)
 
-    file_entry = Entry(newpass_window,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1)   
-    file_entry.place(relx=0.5,y=460,anchor = CENTER)
+    site_entry = Entry(newpass_window,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1)   
+    site_entry.place(relx=0.5,y=280,anchor = CENTER)
 
-    def addfile():
-        global name_newfile
-        global counter
-        name_newfile = file_entry.get()
-        obj.createPassFile(name_newfile)
-        print("Succesfully created a new Password file!")
-        counter += 1
+    passtk = Label(newpass_window,text="Enter Password",font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    passtk.place(relx=0.5,y=380,anchor = CENTER)
+
+    pass_entry = Entry(newpass_window,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show="*")   
+    pass_entry.place(relx=0.5,y=480,anchor = CENTER)
+    
+    def enter_new_pass():
+        site = site_entry.get()
+        password = pass_entry.get()
+        obj.addPass(site,password)
         newpass_window.destroy()
         user()
-    
-    enter_button = Button(newpass_window,command=addfile,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+
+    enter_button = Button(newpass_window,command=enter_new_pass,text="Submit",font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
     enter_button.place(relx=0.5,y=580,anchor = CENTER)
 
 def home():
