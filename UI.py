@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import filedialog
 from cryptography.fernet import Fernet
-import main
+from main import PasswordWallet
 
-obj = main.PasswordWallet()
+obj = PasswordWallet()
 
 primary_color = "#2E86AB"
 background_color = "#080808"
@@ -120,10 +120,7 @@ def login():
 
 def saved_passwords():
     global savedpass_window
-    try:
-        user_window.destroy()
-    except:
-        pass
+    user_window.destroy()
     savedpass_window = Tk()
     savedpass_window.geometry("1280x720")
     savedpass_window.title("Uni-Pass")
@@ -137,7 +134,7 @@ def saved_passwords():
     def goback():
         savedpass_window.destroy()
         user()
-    
+
     for x in Userlist:
         Button(savedpass_window,command=lambda:viewpass(x),text=x,font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0).place(relx=0.5,rely=[(Userlist.index(x)+1)/8],anchor = CENTER)
         # print(x)
