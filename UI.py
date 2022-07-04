@@ -107,6 +107,7 @@ def login():
         else:
             obj.loadKey(keypath)
             final_username = username
+            obj.loadPassFile(username)
             login_window.destroy()
             user()
             # print("You are now Logged in!\n")
@@ -118,8 +119,11 @@ def login():
     back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
 def saved_passwords():
-    # obj.showPass()
-    user_window.destroy()
+    global savedpass_window
+    try:
+        user_window.destroy()
+    except:
+        pass
     savedpass_window = Tk()
     savedpass_window.geometry("1280x720")
     savedpass_window.title("Uni-Pass")
@@ -127,6 +131,42 @@ def saved_passwords():
     icon = PhotoImage(file=r'Assets\images\logo.png')
     savedpass_window.iconphoto(True,icon)
     savedpass_window.config(background=background_color)
+
+    Userlist = obj.showPass()
+
+    def goback():
+        savedpass_window.destroy()
+        user()
+    
+    for x in Userlist:
+        Button(savedpass_window,command=lambda:viewpass(x),text=x,font=("Comic Sans",20,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0).place(relx=0.5,rely=[(Userlist.index(x)+1)/8],anchor = CENTER)
+        # print(x)
+
+    back_button = Button(savedpass_window,command=goback,text="Back",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
+    
+def viewpass(name):
+    global viewpass_window
+    savedpass_window.destroy()
+    viewpass_window = Tk()
+    viewpass_window.geometry("1280x720")
+    viewpass_window.title("Uni-Pass")
+
+    icon = PhotoImage(file=r'Assets\images\logo.png')
+    viewpass_window.iconphoto(True,icon)
+    viewpass_window.config(background=background_color)
+
+    password = obj.getPass(name)
+
+    passwordtk = Label(viewpass_window,text=password,font=("Comic Sans",30,"bold"),fg=primary_color,bg=background_color)
+    passwordtk.place(relx=0.5,y=180,anchor = CENTER)
+
+    def goback2():
+        viewpass_window.destroy()
+        saved_passwords()
+
+    back_button = Button(viewpass_window,command=goback2,text="Back",font=("Comic Sans",15,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0)
+    back_button.place(relx=0.1,rely=0.1,anchor = CENTER)
 
 def user():
     global final_username

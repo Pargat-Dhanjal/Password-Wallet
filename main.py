@@ -12,6 +12,7 @@ class PasswordWallet:
         self.localkey = open("usr/users.key", "rb").read()
 
     def loadKey(self, keypath):
+    # Loads the key in program memory
         fp = open(keypath, "rb")
         self.key = fp.read()
         fp.close()
@@ -31,6 +32,7 @@ class PasswordWallet:
             fp.write(usrname+": "+epass.decode()+": "+ekeypath.decode()+"\n")
 
     def loginUsr(self, usrpath, username, userpass):
+        # Checks if the user exists or not. If yes then returns the location of keypath. Else returns False
         self.usrFile = usrpath
         fp = open(usrpath, 'r')
         for line in fp:
@@ -44,6 +46,7 @@ class PasswordWallet:
         return False
 
     def createPassFile(self, path, initial=None):
+        # Grenerates a password file name with format username.txt in usr/usrdata folder
         self.passFile = "usr/usrdata/"+path+".txt"
         fp = open(self.passFile, "w")
         fp.close()
@@ -52,6 +55,7 @@ class PasswordWallet:
                 self.addPass(key, value)
 
     def loadPassFile(self, path):
+    # Loads the password file in program memory
         self.passFile = "usr/usrdata/"+path+".txt"
         fp = open(self.passFile, 'r')
         for line in fp:
@@ -60,6 +64,7 @@ class PasswordWallet:
                 encrypted.encode()).decode()
 
     def addPass(self, site, password):
+    # Adds new passwords to the username.txt file
         self.passDict[site] = password
         if self.passFile is not None:
             fp = open(self.passFile, 'a+')
@@ -67,13 +72,18 @@ class PasswordWallet:
             fp.write(site+": "+encrypted.decode()+"\n")
 
     def getPass(self, site):
+    # Returns the decrypted passwords of given site name
         return self.passDict[site]
 
     def showPass(self):
+    # prints  the  saved password site names
+        siteNames=[]
         for i in self.passDict.keys():
-            print(i)
+            siteNames.append(i)
+        return siteNames
 
 def viewPass(obj):
+# This  function gets called once the user has logged in
     cond = True
     while cond:
         print("""Select an Option
@@ -90,7 +100,8 @@ def viewPass(obj):
             obj.addPass(site, password)
 
         elif n == "2":
-            obj.showPass()
+            li=obj.showPass()
+            print(li)
         
         elif n=="3":
             site = input("Enter site name to  get password: ")
@@ -120,8 +131,8 @@ def main():
             usrname = input("Enter username: ")
             password = input("Enter Password: ")
             keypath = input("Enter a secure key path to store key: ")
-            obj.createPassFile(usrname)
             obj.addUsr(usrname, password, keypath)
+            obj.createPassFile(usrname)
             print("Succesfully Created a new User!")
             viewPass(obj)
 
