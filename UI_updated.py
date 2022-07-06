@@ -141,19 +141,26 @@ class Window:
     def viewsite():
         operations.destroy_window() # destorys the user window 
         operations.draw_window() # creates a new blank window
-    
+
+        operations.text("Enter Site Name",30,0.5,0.2) # adds text
+        site_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1) # adds an entry widget
+        site_entry.place(relx=0.5,rely=0.3,anchor = CENTER) # places the entry widget
+
+        def viewpass():
+            website = site_entry.get()
+            operations.destroy_window() # destorys the viewsite window
+            operations.draw_window() # draws a blank window
+
+            operations.button(lambda:[operations.destroy_window(),Window.user()],"Exit",15,0.5,0.6) # adds the exit button
+
+            password = obj.getPass(website) # returns the decrypted passwords of given site name
+            operations.text(password,30,0.5,0.5) # adds the password text
+
+        operations.button(viewpass,"Enter",15,0.5,0.4) # adds the enterbutton button
+        
         sitelist = obj.showPass() # saves the saved passowrds in a list
         operations.button(lambda:[operations.destroy_window(),Window.user()],"Back",15,0.1,0.1) # adds the back button
 
         for x in sitelist:
-            operations.button(lambda:[Window.viewpass(x)],x,15,0.5,[(sitelist.index(x)+1)/8]) # adds a button for each element in the sitelist one below the other
-    
-    def viewpass(name):
-        operations.destroy_window() # destorys the viewsite window
-        operations.draw_window() # draws a blank window
-
-        operations.button(lambda:[operations.destroy_window(),Window.user()],"Exit",15,0.5,0.6) # adds the exit button
-
-        password = obj.getPass(name) # returns the decrypted passwords of given site name
-        operations.text(password,30,0.5,0.5) # adds the password text
+            operations.text(x,15,0.5,[(sitelist.index(x)+4)/8]) # adds a button for each element in the sitelist one below the other
 Window.home()
