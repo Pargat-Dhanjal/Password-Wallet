@@ -158,5 +158,3 @@ def main():
         else:
             print("Kindly enter a correct option only!")
 
-
-main()
