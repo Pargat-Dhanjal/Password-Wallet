@@ -1,8 +1,5 @@
-<p align="left">
-  <img src="https://github.com/Pargat-Dhanjal/Password-Wallet/blob/master/Assets/images/logo.png" width="350" alt="Logo">
-</p>
 
-# Encrypt-It
+# <img src="https://github.com/Pargat-Dhanjal/Password-Wallet/blob/master/Assets/images/logo.png" width="35" alt="Logo"> Encrypt-It
 
 Encrypt-It is a modern, secure, and open-source password manager that stores and manages your most sensitive information. You can run Encrypt-It on Windows, macOS, and Linux systems. Encrypt-It is for users who tend to forget their passwords and want to lock their passwords behind a master password.
 
