@@ -47,7 +47,7 @@ Run the program
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Pargat-Dhanjal/Password-Wallet/blob/master/Assets/Screenshot.png)
 
 
 ## Contributing
