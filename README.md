@@ -1,6 +1,6 @@
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
+<p align="left">
+  <img src="https://github.com/Pargat-Dhanjal/Password-Wallet/blob/master/Assets/images/logo.png" width="350" alt="Logo">
+</p>
 
 # Encrypt-It
 
@@ -35,7 +35,7 @@ Install dependencies
 Run the program
 
 ```bash
-  python  main.py
+  python gui.py
 ```
 *Note: Use python version 3.10.4 or above*
 
