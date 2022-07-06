@@ -5,8 +5,8 @@ from main import PasswordWallet
 
 obj = PasswordWallet() #Adding the password wallet-class from main.py
 
-primary_color = "#2E86AB" # primary color (blue)
-background_color = "#080808" #secondary (black)
+primary_color = "#00353F" # primary color (blue)
+background_color = "#6CE6DB" #secondary (black)
 
 class operations():
     def draw_window(): 
@@ -15,7 +15,7 @@ class operations():
         window_name.geometry("1280x720") # Defined window geometry
         window_name.title("Uni-Pass") # Defined  window title
 
-        icon = PhotoImage(file=r'Assets\images\logo.png') #imported window logo from its saved location
+        icon = PhotoImage(file=r'Assets/images/logo.png') #imported window logo from its saved location
         window_name.iconphoto(True,icon) # added window logo 
         window_name.config(background=background_color) # set the background color to the window
     
@@ -33,8 +33,8 @@ class operations():
 class Window:
     def home(): # The main home function (gets called at the start)
         operations.draw_window()
-        operations.text("Uni-Pass",100,0.5,0.3) # adds title
-        operations.text("~The only password you'll ever need",20,0.7,0.45) # adds subtitle
+        operations.text("Encrypt-It",100,0.5,0.3) # adds title
+        operations.text("Remembering passwords just got alot easier!",20,0.5,0.45) # adds subtitle
 
         operations.button(Window.login,"Login",20,0.4,0.7) # login button
         operations.button(Window.sign_up,"Sign-up",20,0.6,0.7) # signup button
