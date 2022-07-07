@@ -7,7 +7,6 @@ obj = PasswordWallet() #Adding the password wallet-class from main.py
 
 primary_color = "#00353F" # primary color (white)
 background_color = "#6CE6DB" #secondary (blue)
-gray = "#4D4D4D" # Gray
 
 class operations():
     def draw_window(): 
@@ -28,7 +27,7 @@ class operations():
         title.place(relx=x,rely=y,anchor = CENTER) # places the text widget in place
 
     def button(task,content,size,x,y,width=5):
-        signup_button = Button(window_name,command=task,text=content,font=("Comic Sans",size,"bold"),bg=gray,fg=primary_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0,width = width) # addes a button widget
+        signup_button = Button(window_name,command=task,text=content,font=("Comic Sans",size,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0,width = width) # addes a button widget
         signup_button.place(relx=x,rely=y,anchor = CENTER) # places the button widget in place
 class Window:
     def home(): # The main home function (gets called at the start)
@@ -36,8 +35,8 @@ class Window:
         operations.text("Encrypt-It",100,0.5,0.3) # adds title
         operations.text("Remembering passwords just got alot easier!",20,0.5,0.45) # adds subtitle
 
-        operations.button(Window.login,"Login",40,0.5,0.6,20) # login button
-        operations.button(Window.sign_up,"Sign-up",40,0.5,0.7,20) # signup button
+        operations.button(Window.login,"Login",20,0.5,0.6,10) # login button
+        operations.button(Window.sign_up,"Sign-up",20,0.5,0.7,10) # signup button
 
         window_name.mainloop() # mainloop for the code to run (v-imp)
     
