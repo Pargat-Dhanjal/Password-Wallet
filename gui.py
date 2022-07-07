@@ -5,15 +5,16 @@ from main import PasswordWallet
 
 obj = PasswordWallet() #Adding the password wallet-class from main.py
 
-primary_color = "#00353F" # primary color (blue)
-background_color = "#6CE6DB" #secondary (black)
+primary_color = "#00353F" # primary color (white)
+background_color = "#6CE6DB" #secondary (blue)
+gray = "#4D4D4D" # Gray
 
 class operations():
     def draw_window(): 
         global window_name
         window_name = Tk() #Creates a blank window
         window_name.geometry("1280x720") # Defined window geometry
-        window_name.title("Uni-Pass") # Defined  window title
+        window_name.title("Encrypt-It") # Defined  window title
 
         icon = PhotoImage(file=r'Assets/images/logo.png') #imported window logo from its saved location
         window_name.iconphoto(True,icon) # added window logo 
@@ -26,18 +27,17 @@ class operations():
         title = Label(window_name,text=content,font=("Arial",size,"bold"),fg=primary_color,bg=background_color) # addes a text widget
         title.place(relx=x,rely=y,anchor = CENTER) # places the text widget in place
 
-    def button(task,content,size,x,y):
-        signup_button = Button(window_name,command=task,text=content,font=("Comic Sans",size,"bold"),bg=primary_color,fg=background_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0) # addes a button widget
+    def button(task,content,size,x,y,width):
+        signup_button = Button(window_name,command=task,text=content,font=("Comic Sans",size,"bold"),bg=gray,fg=primary_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0,width = width) # addes a button widget
         signup_button.place(relx=x,rely=y,anchor = CENTER) # places the button widget in place
-
 class Window:
     def home(): # The main home function (gets called at the start)
         operations.draw_window()
         operations.text("Encrypt-It",100,0.5,0.3) # adds title
         operations.text("Remembering passwords just got alot easier!",20,0.5,0.45) # adds subtitle
 
-        operations.button(Window.login,"Login",20,0.4,0.7) # login button
-        operations.button(Window.sign_up,"Sign-up",20,0.6,0.7) # signup button
+        operations.button(Window.login,"Login",40,0.5,0.6,20) # login button
+        operations.button(Window.sign_up,"Sign-up",40,0.5,0.7,20) # signup button
 
         window_name.mainloop() # mainloop for the code to run (v-imp)
     
