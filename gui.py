@@ -55,7 +55,7 @@ class Window:
             path = filedialog.askdirectory() # opens up file explorer to browse 
         
         operations.text("Select key path",30,0.5,0.6) # adds text
-        path_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show='*') # adds entry widget 
+        path_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1) # adds entry widget 
         path_entry.place(relx=0.5,rely=0.7,anchor = CENTER) # places entry widget
 
         # IF ENTER BUTTON PRESSED
@@ -88,10 +88,11 @@ class Window:
             global finalusername
             username = username_entry.get() # gets the value entered in the username entry widget
             password = password_entry.get() # gets the value entered in the password entry widget
-            keypath = obj.loginUsr("usr/usrFile.txt", username, password)+".key"  # Checks if the user exists or not. If yes then returns the location of keypath. Else returns False
+            keypath = obj.loginUsr("usr/usrFile.txt", username, password)  # Checks if the user exists or not. If yes then returns the location of keypath. Else returns False
             if(keypath == False):
-                    print("Wrong Username or Password") # prints wrong username or password in the terminal 
+                operations.text("Wrong username or password!",20,0.5,0.9)
             else:
+                keypath = keypath + ".key"
                 obj.loadKey(keypath) # Loads the key in program memory
                 obj.loadPassFile(username) # Loads the password file in program memory
                 finalusername = username # temorarily stores the username in a variable
