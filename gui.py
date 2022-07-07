@@ -27,7 +27,7 @@ class operations():
         title = Label(window_name,text=content,font=("Arial",size,"bold"),fg=primary_color,bg=background_color) # addes a text widget
         title.place(relx=x,rely=y,anchor = CENTER) # places the text widget in place
 
-    def button(task,content,size,x,y,width):
+    def button(task,content,size,x,y,width=5):
         signup_button = Button(window_name,command=task,text=content,font=("Comic Sans",size,"bold"),bg=gray,fg=primary_color,activeforeground=primary_color,activebackground=background_color,borderwidth=0,width = width) # addes a button widget
         signup_button.place(relx=x,rely=y,anchor = CENTER) # places the button widget in place
 class Window:
@@ -69,7 +69,7 @@ class Window:
             operations.destroy_window() # destroys the signup window 
             Window.home() # navigates back to home 
         
-        operations.button(get_path,"Browse",15,0.68,0.7) # adds browse button
+        operations.button(get_path,"Browse",15,0.68,0.7,7) # adds browse button
         #IF BACK BUTTON PRESSED
         operations.button(lambda:[operations.destroy_window(),Window.home()],"Back",15,0.2,0.2)
         operations.button(enter_button,"Enter",20,0.5,0.8) # adds enter button
@@ -113,8 +113,8 @@ class Window:
         # IF LOGOUT BUTTON IS PRESSES
         operations.button(logout,"logout",15,0.8,0.1) # adds logout button
 
-        operations.button(Window.addpass,"Add a new password",15,0.5,0.3) # adds , add a new password button
-        operations.button(Window.viewsite,"View all passwords",15,0.5,0.4) # adds view password button
+        operations.button(Window.addpass,"Add a new password",15,0.5,0.3,20) # adds , add a new password button
+        operations.button(Window.viewsite,"View all passwords",15,0.5,0.4,20) # adds view password button
     
     def addpass():
         operations.destroy_window() # destroys the user window 
