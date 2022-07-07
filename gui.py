@@ -124,7 +124,7 @@ class Window:
         site_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1) # adds an entry widget
         site_entry.place(relx=0.5,rely=0.3,anchor = CENTER) # places the entry widget
         operations.text("Enter Password",30,0.5,0.5) # adds test
-        pass_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1) # adds an entry widget
+        pass_entry = Entry(window_name,width=20,insertbackground=primary_color,font=("Comic Sans",20,"bold"),bg = background_color,fg = primary_color,borderwidth=1,show="*") # adds an entry widget
         pass_entry.place(relx=0.5,rely=0.6,anchor = CENTER) # places the entry widget
 
         operations.button(lambda:[operations.destroy_window(),Window.user()],"Back",15,0.2,0.2) # adds the back button
