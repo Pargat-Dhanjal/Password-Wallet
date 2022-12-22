@@ -56,7 +56,7 @@ Contributions are always welcome!
 
 ## License
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/Pargat-Dhanjal/Password-Wallet/blob/master/LICENSE.md)
+![MIT License](https://img.shields.io/github/license/Pargat-Dhanjal/Password-Wallet?style=for-the-badge)
 
 
 ## Authors
